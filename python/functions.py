@@ -4,6 +4,9 @@ from pkmnCollEntryClass import PkmnCollEntry
 from pkmnStatsEntryClass import PkmnStatsEntry
 from pgFunctions import *
 
+# All functions in the python project that do not access the database
+# Note: although these functions can call other functions in pgFunctions,
+# They should never access the database directly
 
 def readPkmnCollDataFromUser(crsr):
 
@@ -44,7 +47,17 @@ def readPkmnStatsDataFromUser():
   
   return pkmnStatsData
   
-# Other functions
+def readPkmnCollNumFromUser():
+  collNum = input("Enter the collNum of the pokemon to be deleted: ")
+  return collNum
+  
+def deletePkmnByCollNum(crsr,collNum):
+  pkmnToBeDeleted = pgSelectPkmnByCollNum(crsr,collNum)
+  print("Deleting the following pokemon: ")
+  printer(crsr,pkmnToBeDeleted)
+  
+  pgDeletePkmn(crsr,collNum)
+
 def printer(crsr,res):
   cols = []
   for elt in crsr.description:

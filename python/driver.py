@@ -1,5 +1,5 @@
 
-# This python file connects to the pokemondb database on localhost
+# This python project connects to the pokemondb database on localhost
 # features:
 # insert pokemon to collection
 # search pokedex by dex_id
@@ -9,6 +9,9 @@
 import psycopg2
 from pgFunctions import *
 from functions import *
+
+# Note: The only function this file defines is the main function
+# all other functions are defined in functions.py and pgFunctions.py
 
 # main
 def main():
@@ -21,7 +24,7 @@ def main():
     menuOption = None
     
     while menuOption != '0':
-      print("Enter an option:\n1 = show collection\n2 = search pokedex for pokemon by name\n3 = insert pokemon to database\n4 = add basic stats\n0 = quit")
+      print("Enter an option:\n1 = show collection\n2 = search pokedex for pokemon by name\n3 = insert pokemon to database\n4 = add basic stats\n5 = delete pokemon by collection number\n0 = quit")
       menuOption = input()
       
       #list all pokemon in the collection
@@ -42,6 +45,9 @@ def main():
       if menuOption == '4':
         pkmnStatsData = readPkmnStatsDataFromUser()
         pgUpdatePkmnStats(crsr,pkmnStatsData)
+      if menuOption == '5':
+        pkmnCollNum = readPkmnCollNumFromUser()
+        deletePkmnByCollNum(crsr,pkmnCollNum)
                 
     crsr.close()
   except(Exception, psycopg2.DatabaseError) as error:

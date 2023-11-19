@@ -3,8 +3,10 @@ import psycopg2
 from pkmnCollEntryClass import PkmnCollEntry
 from pkmnStatsEntryClass import PkmnStatsEntry
 
-#Postgres related functions
-
+# Postgres related functions
+# Note: These are the only functions in the python program that access the database
+# Accessing the database is their primary purpose
+# User input, input validation, etc are to be handled by functions in functions.py
 
 def pgStartConnection(connection):
   # sensitive information is stored as environment variables
@@ -42,5 +44,13 @@ def pgUpdatePkmnStats(crsr,pkmnStatsData:PkmnStatsEntry):
   updPkmnStats = """UPDATE pkmn_stats SET hp = %s, atk = %s, def = %s, sp_atk = %s, sp_def = %s, speed = %s WHERE coll_num = %s;"""
   crsr.execute(updPkmnStats,(pkmnStatsData.hp,pkmnStatsData.attack,pkmnStatsData.defense,pkmnStatsData.spatk,pkmnStatsData.spdef,pkmnStatsData.speed,pkmnStatsData.collNum))
 
+def pgSelectPkmnByCollNum(crsr,collNum):
+    selectPkmn = """SELECT * FROM pkmn_coll WHERE coll_num = %s"""
+    crsr.execute(selectPkmn,collNum)
+    selectedPkmn = crsr.fetchall()
+    return selectedPkmn
 
+def pgDeletePkmn(crsr,collNum):
+  deletePkmn = """DELETE FROM pkmn_coll WHERE coll_num = %s"""
+  crsr.execute(deletePkmn,collNum)
 
