@@ -12,9 +12,9 @@ def readPkmnCollDataFromUser(crsr):
 
   pkmnCollData = PkmnCollEntry()
   
-  print("Enter pokemon collNum, name, level, IV: ")
+  print("Enter pokemon collID, name, level, IV: ")
   pkmnCollInput = input().split()
-  pkmnCollData.collNum = pkmnCollInput[0]
+  pkmnCollData.collID = pkmnCollInput[0]
   pkmnCollData.name = pkmnCollInput[1]
   pkmnCollData.level = pkmnCollInput[2]
   pkmnCollData.iv = pkmnCollInput[3]
@@ -35,9 +35,9 @@ def readPkmnStatsDataFromUser():
   
   pkmnStatsData = PkmnStatsEntry()
   
-  print("Enter pokemon collNum, HP, Atk, Def, Sp. Atk, Sp. Def, Speed: ")
+  print("Enter pokemon collID, HP, Atk, Def, Sp. Atk, Sp. Def, Speed: ")
   pkmnStatsInput = input().split()
-  pkmnStatsData.collNum = pkmnStatsInput[0]
+  pkmnStatsData.collID = pkmnStatsInput[0]
   pkmnStatsData.hp = pkmnStatsInput[1]
   pkmnStatsData.attack = pkmnStatsInput[2]
   pkmnStatsData.defense = pkmnStatsInput[3]
@@ -47,16 +47,16 @@ def readPkmnStatsDataFromUser():
   
   return pkmnStatsData
   
-def readPkmnCollNumFromUser():
-  collNum = input("Enter the collNum of the pokemon to be deleted: ")
-  return collNum
+def readPkmnCollIDFromUser():
+  collID = input("Enter the collID of the pokemon to be deleted: ")
+  return collID
   
-def delPkmnByCollNum(crsr,collNum):
-  pkmnToBeDeleted = pgSelPkmnByCollNum(crsr,collNum)
+def delPkmnByCollID(crsr,collID):
+  pkmnToBeDeleted = pgSelPkmnByCollID(crsr,collID)
   print("Deleting the following pokemon: ")
   printer(crsr,pkmnToBeDeleted)
   
-  pgDelPkmn(crsr,collNum)
+  pgDelPkmn(crsr,collID)
 
 def printer(crsr,res):
   cols = []

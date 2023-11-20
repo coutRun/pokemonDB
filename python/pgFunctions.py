@@ -22,7 +22,7 @@ def pgStartConnection(connection):
 
 def pgSelPkmnColl(crsr):
     
-  showColl = """SELECT coll_num,pkmn_name,lvl,iv,dex_id FROM pkmn_coll ORDER BY coll_num ASC;"""
+  showColl = """SELECT coll_id,pkmn_name,lvl,iv,dex_id FROM pkmn_coll ORDER BY coll_id ASC;"""
 
   crsr.execute(showColl)
   pkmnColl = crsr.fetchall()
@@ -37,20 +37,20 @@ def pgSelPokedexEntryByName(crsr,pkmnName):
   return searchResults
 
 def pgInsPkmnColl(crsr,pkmnCollData:PkmnCollEntry):
-  insPkmn = """INSERT INTO pkmn_coll (pkmn_name,lvl,iv,dex_id,coll_num) VALUES (%s,%s,%s,%s,%s);"""
-  crsr.execute(insPkmn,(pkmnCollData.name,pkmnCollData.level,pkmnCollData.iv,pkmnCollData.dexID,pkmnCollData.collNum))
+  insPkmn = """INSERT INTO pkmn_coll (pkmn_name,lvl,iv,dex_id,coll_id) VALUES (%s,%s,%s,%s,%s);"""
+  crsr.execute(insPkmn,(pkmnCollData.name,pkmnCollData.level,pkmnCollData.iv,pkmnCollData.dexID,pkmnCollData.collID))
 
 def pgUpdPkmnStats(crsr,pkmnStatsData:PkmnStatsEntry):
-  updPkmnStats = """UPDATE pkmn_stats SET hp = %s, atk = %s, def = %s, sp_atk = %s, sp_def = %s, speed = %s WHERE coll_num = %s;"""
-  crsr.execute(updPkmnStats,(pkmnStatsData.hp,pkmnStatsData.attack,pkmnStatsData.defense,pkmnStatsData.spatk,pkmnStatsData.spdef,pkmnStatsData.speed,pkmnStatsData.collNum))
+  updPkmnStats = """UPDATE pkmn_stats SET hp = %s, atk = %s, def = %s, sp_atk = %s, sp_def = %s, speed = %s WHERE coll_ID = %s;"""
+  crsr.execute(updPkmnStats,(pkmnStatsData.hp,pkmnStatsData.attack,pkmnStatsData.defense,pkmnStatsData.spatk,pkmnStatsData.spdef,pkmnStatsData.speed,pkmnStatsData.collID))
 
-def pgSelPkmnByCollNum(crsr,collNum):
-    selectPkmn = """SELECT * FROM pkmn_coll WHERE coll_num = %s"""
-    crsr.execute(selectPkmn,[collNum])
+def pgSelPkmnByCollID(crsr,collID):
+    selectPkmn = """SELECT * FROM pkmn_coll WHERE coll_ID = %s"""
+    crsr.execute(selectPkmn,[collID])
     selectedPkmn = crsr.fetchall()
     return selectedPkmn
 
-def pgDelPkmn(crsr,collNum):
-  deletePkmn = """DELETE FROM pkmn_coll WHERE coll_num = %s"""
-  crsr.execute(deletePkmn,[collNum])
+def pgDelPkmn(crsr,collID):
+  deletePkmn = """DELETE FROM pkmn_coll WHERE coll_ID = %s"""
+  crsr.execute(deletePkmn,[collID])
 

@@ -24,7 +24,7 @@ def main():
     menuOption = None
     
     while menuOption != '0':
-      print("Enter an option:\n1 = show collection\n2 = search pokedex for pokemon by name\n3 = insert pokemon to database\n4 = add basic stats\n5 = delete pokemon by collection number\n0 = quit")
+      print("Enter an option:\n1 = show collection\n2 = search pokedex for pokemon by name\n3 = insert pokemon to database\n4 = add basic stats\n5 = delete pokemon by collection ID\n0 = quit")
       menuOption = input()
       
       #list all pokemon in the collection
@@ -46,8 +46,8 @@ def main():
         pkmnStatsData = readPkmnStatsDataFromUser()
         pgUpdPkmnStats(crsr,pkmnStatsData)
       if menuOption == '5':
-        pkmnCollNum = readPkmnCollNumFromUser()
-        delPkmnByCollNum(crsr,pkmnCollNum)
+        pkmnCollID = readPkmnCollIDFromUser()
+        delPkmnByCollID(crsr,pkmnCollID)
                 
     crsr.close()
   except(Exception, psycopg2.DatabaseError) as error:

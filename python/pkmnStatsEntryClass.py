@@ -1,5 +1,5 @@
 class PkmnStatsEntry:
-  collNum = None
+  collID = None
   hp = None
   hpiv = None
   attack = None

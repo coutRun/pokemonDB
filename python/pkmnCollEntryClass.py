@@ -3,4 +3,4 @@ class PkmnCollEntry:
   level = None
   iv = None
   dexID = None
-  collNum = None
+  collID = None
