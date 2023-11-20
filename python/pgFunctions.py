@@ -46,11 +46,11 @@ def pgUpdatePkmnStats(crsr,pkmnStatsData:PkmnStatsEntry):
 
 def pgSelectPkmnByCollNum(crsr,collNum):
     selectPkmn = """SELECT * FROM pkmn_coll WHERE coll_num = %s"""
-    crsr.execute(selectPkmn,collNum)
+    crsr.execute(selectPkmn,[collNum])
     selectedPkmn = crsr.fetchall()
     return selectedPkmn
 
 def pgDeletePkmn(crsr,collNum):
   deletePkmn = """DELETE FROM pkmn_coll WHERE coll_num = %s"""
-  crsr.execute(deletePkmn,collNum)
+  crsr.execute(deletePkmn,[collNum])
 
