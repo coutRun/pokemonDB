@@ -19,7 +19,7 @@ def readPkmnCollDataFromUser(crsr):
   pkmnCollData.level = pkmnCollInput[2]
   pkmnCollData.iv = pkmnCollInput[3]
   
-  searchResults = pgSelectPokedexEntryByName(crsr,pkmnCollData.name)
+  searchResults = pgSelPokedexEntryByName(crsr,pkmnCollData.name)
   # if there's only 1 search result, autofill dexID
   if len(searchResults) == 1:
     pkmnCollData.dexID = searchResults[0][0]
@@ -51,12 +51,12 @@ def readPkmnCollNumFromUser():
   collNum = input("Enter the collNum of the pokemon to be deleted: ")
   return collNum
   
-def deletePkmnByCollNum(crsr,collNum):
-  pkmnToBeDeleted = pgSelectPkmnByCollNum(crsr,collNum)
+def delPkmnByCollNum(crsr,collNum):
+  pkmnToBeDeleted = pgSelPkmnByCollNum(crsr,collNum)
   print("Deleting the following pokemon: ")
   printer(crsr,pkmnToBeDeleted)
   
-  pgDeletePkmn(crsr,collNum)
+  pgDelPkmn(crsr,collNum)
 
 def printer(crsr,res):
   cols = []

@@ -29,25 +29,25 @@ def main():
       
       #list all pokemon in the collection
       if menuOption == '1':
-        coll = pgSelectPkmnColl(crsr)
+        coll = pgSelPkmnColl(crsr)
         printer(crsr,coll)
             
       # search pokedex by name
       if menuOption == '2':
         pkmnName = input("Enter pokemon name: ")
-        searchResults = pgSelectPokedexEntryByName(crsr,pkmnName)
+        searchResults = pgSelPokedexEntryByName(crsr,pkmnName)
         printer(crsr,searchResults)
                 
       # insert pokemon into collection
       if menuOption == '3':
         pkmnCollData = readPkmnCollDataFromUser(crsr)
-        pgInsertPkmnColl(crsr,pkmnCollData)
+        pgInsPkmnColl(crsr,pkmnCollData)
       if menuOption == '4':
         pkmnStatsData = readPkmnStatsDataFromUser()
-        pgUpdatePkmnStats(crsr,pkmnStatsData)
+        pgUpdPkmnStats(crsr,pkmnStatsData)
       if menuOption == '5':
         pkmnCollNum = readPkmnCollNumFromUser()
-        deletePkmnByCollNum(crsr,pkmnCollNum)
+        delPkmnByCollNum(crsr,pkmnCollNum)
                 
     crsr.close()
   except(Exception, psycopg2.DatabaseError) as error:

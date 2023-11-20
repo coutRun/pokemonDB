@@ -20,7 +20,7 @@ def pgStartConnection(connection):
   return connection
 
 
-def pgSelectPkmnColl(crsr):
+def pgSelPkmnColl(crsr):
     
   showColl = """SELECT coll_num,pkmn_name,lvl,iv,dex_id FROM pkmn_coll ORDER BY coll_num ASC;"""
 
@@ -28,7 +28,7 @@ def pgSelectPkmnColl(crsr):
   pkmnColl = crsr.fetchall()
   return pkmnColl
 
-def pgSelectPokedexEntryByName(crsr,pkmnName):
+def pgSelPokedexEntryByName(crsr,pkmnName):
     
   lookupDex = """SELECT dex_id,form,type1,type2,form FROM pokedex WHERE dex_name = %s;"""
 
@@ -36,21 +36,21 @@ def pgSelectPokedexEntryByName(crsr,pkmnName):
   searchResults = crsr.fetchall()
   return searchResults
 
-def pgInsertPkmnColl(crsr,pkmnCollData:PkmnCollEntry):
+def pgInsPkmnColl(crsr,pkmnCollData:PkmnCollEntry):
   insPkmn = """INSERT INTO pkmn_coll (pkmn_name,lvl,iv,dex_id,coll_num) VALUES (%s,%s,%s,%s,%s);"""
   crsr.execute(insPkmn,(pkmnCollData.name,pkmnCollData.level,pkmnCollData.iv,pkmnCollData.dexID,pkmnCollData.collNum))
 
-def pgUpdatePkmnStats(crsr,pkmnStatsData:PkmnStatsEntry):
+def pgUpdPkmnStats(crsr,pkmnStatsData:PkmnStatsEntry):
   updPkmnStats = """UPDATE pkmn_stats SET hp = %s, atk = %s, def = %s, sp_atk = %s, sp_def = %s, speed = %s WHERE coll_num = %s;"""
   crsr.execute(updPkmnStats,(pkmnStatsData.hp,pkmnStatsData.attack,pkmnStatsData.defense,pkmnStatsData.spatk,pkmnStatsData.spdef,pkmnStatsData.speed,pkmnStatsData.collNum))
 
-def pgSelectPkmnByCollNum(crsr,collNum):
+def pgSelPkmnByCollNum(crsr,collNum):
     selectPkmn = """SELECT * FROM pkmn_coll WHERE coll_num = %s"""
     crsr.execute(selectPkmn,[collNum])
     selectedPkmn = crsr.fetchall()
     return selectedPkmn
 
-def pgDeletePkmn(crsr,collNum):
+def pgDelPkmn(crsr,collNum):
   deletePkmn = """DELETE FROM pkmn_coll WHERE coll_num = %s"""
   crsr.execute(deletePkmn,[collNum])
 
