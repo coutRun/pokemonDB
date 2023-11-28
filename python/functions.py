@@ -3,6 +3,7 @@ import pandas
 from pkmnCollEntryClass import PkmnCollEntry
 from pkmnStatsEntryClass import PkmnStatsEntry
 from pgFunctions import *
+import csv
 
 # All functions in the python project that do not access the database
 # Note: although these functions can call other functions in pgFunctions,
@@ -29,7 +30,6 @@ def readPkmnCollDataFromUser(crsr):
     pkmnCollData.dexID = input("Enter pokemon dexID: ")
   
   return pkmnCollData
-
 
 def readPkmnStatsDataFromUser():
   
