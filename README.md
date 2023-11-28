@@ -59,3 +59,13 @@ pkmn_nicknames
 Columns:
 coll_id
 nickname
+
+## To Do
+
+- csv file input
+  - inputColl
+    - function for reading file
+    - function for translating a line into a pkmnColl object
+    - function for searching for dexID (code is in readPkmnCollDataFromUser)
+    - the code for this feature in driver.py should be almost identical to the code under menuOption 3
+- find a way to group functions by feature and functionality
