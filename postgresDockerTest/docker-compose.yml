@@ -36,4 +36,5 @@ services:
         - ./db-data/:/var/lib/postgresql/data/
         # In this example, we share an init.sql script with the container
         # The init script will be executed when the database is first run
+        # NOTE: volumes can be cleared using `docker-compose down -v`
         - ./init.sql:/docker-entrypoint-initdb.d/init.sql

@@ -6,3 +6,4 @@ V1/csvFiles/.DS_Store
 V1/python/.DS_Store
 V1/sqlScripts/.DS_Store
 V1/.DS_Store
+postgresDockerTest/db-data/*
