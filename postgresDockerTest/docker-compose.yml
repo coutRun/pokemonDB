@@ -38,3 +38,10 @@ services:
         # The init script will be executed when the database is first run
         # NOTE: volumes can be cleared using `docker-compose down -v`
         - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  client:
+    #Offical python image
+    image: 'python:latest'
+    ports:
+      - #TODO: expose the correct ports
+    #TODO: map src directory to the correct path in the container
+    #TODO: add python packages psycopg2 and OS to a volume
