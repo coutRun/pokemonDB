@@ -39,9 +39,13 @@ services:
         # NOTE: volumes can be cleared using `docker-compose down -v`
         - ./init.sql:/docker-entrypoint-initdb.d/init.sql
   client:
-    #Offical python image
-    image: 'python:latest'
+    build: .
     ports:
-      - #TODO: expose the correct ports
-    #TODO: map src directory to the correct path in the container
-    #TODO: add python packages psycopg2 and OS to a volume
+      - 80:80
+      - 5678:5678
+    depends_on:
+      - database
+
+#TODO:
+# Separate files by services: /client /database
+# Make directory for sensitive information
