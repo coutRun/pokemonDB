@@ -10,3 +10,9 @@ postgresDockerTest/db-data/*
 postgresDockerTest/.DS_Store
 postgresDockerTest/secrets/postgres_password.txt
 postgresDockerTest/secrets/postgres_user.txt
+postgresDockerTest/database/db-data/*
+postgresDockerTest/database/db-data/pg_wal/000000010000000000000001
+postgresDockerTest/database/db-data/pg_stat/pgstat.stat
+postgresDockerTest/database/db-data/global/pg_control
+postgresDockerTest/database/db-data/pg_stat/pgstat.stat
+postgresDockerTest/database/db-data/pg_wal/000000010000000000000001
