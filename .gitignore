@@ -8,3 +8,5 @@ V1/sqlScripts/.DS_Store
 V1/.DS_Store
 postgresDockerTest/db-data/*
 postgresDockerTest/.DS_Store
+postgresDockerTest/secrets/postgres_password.txt
+postgresDockerTest/secrets/postgres_user.txt

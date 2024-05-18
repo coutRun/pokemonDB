@@ -3,11 +3,33 @@
 # We use '3' because it's the last version.
 version: '3'
 
-# You should know that Docker Compose works with services.
+secrets:
+  postgres_user:
+    file: ./secrets/postgres_user.txt
+  postgres_password:
+    file: ./secrets/postgres_password.txt
+
+# Docker Compose works with services.
 # 1 service = 1 container.
 # For example, a service, a server, a client, a database...
-# We use the keyword 'services' to start to create services.
+# The keyword 'services' to start to create services.
 services:
+  client:
+    build: ./client
+    ports:
+      - 80:80
+      - 5678:5678
+    secrets:
+      - postgres_user
+      - postgres_password
+    environment:
+      - POSTGRES_DB: test_db
+      - DATABASE_PORT: 5432
+      - POSTGRES_USER_FILE: /run/secrets/postgres_user
+      - POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+    depends_on:
+      - database
+
   # The name of our service is "database"
   # but you can use the name of your choice.
   # Note: This may change the commands you are going to use a little bit.
@@ -15,11 +37,11 @@ services:
     # Official Postgres image from DockerHub (we use the last version)
     image: 'postgres:latest'
 
-    # By default, a Postgres database is running on the 5432 port.
+    # Postgres database is running on the 5432 port by default
     # If we want to access the database from our computer (outside the container),
     # we must share the port with our computer's port.
     # The syntax is [port we want on our machine]:[port we want to retrieve in the container]
-    # Note: You are free to change your computer's port,
+    # Note: the computer's port can be changed,
     # but take into consideration that it will change the way
     # you are connecting to your database.
     ports:
@@ -33,19 +55,15 @@ services:
         # It means that every time the repository is modifying the data inside
         # of `/var/lib/postgresql/data/`, automatically the change will appear in `db-data`
         # You don't need to create the `db-data` folder. Docker Compose will do it for you
-        - ./db-data/:/var/lib/postgresql/data/
+        - ./database/db-data/:/var/lib/postgresql/data/
         # In this example, we share an init.sql script with the container
         # The init script will be executed when the database is first run
         # NOTE: volumes can be cleared using `docker-compose down -v`
-        - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-  client:
-    build: .
-    ports:
-      - 80:80
-      - 5678:5678
-    depends_on:
-      - database
-
-#TODO:
-# Separate files by services: /client /database
-# Make directory for sensitive information
+        - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    secrets:
+      - postgres_user
+      - postgres_password
+    environment:
+      - POSTGRES_DB: test_db
+      - POSTGRES_USER_FILE: /run/secrets/postgres_user
+      - POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
