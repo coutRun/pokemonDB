@@ -1,6 +1,8 @@
-FROM python:3
+FROM python:latest
 
-WORKDIR /code
+COPY . /app
 
-COPY requirements.txt ./
+WORKDIR /app
+
 RUN pip install --no-cache-dir -r requirements.txt
+CMD [ "python", "src/connectionTest.py" ]

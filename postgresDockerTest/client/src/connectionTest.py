@@ -13,7 +13,8 @@ def connect():
             database=os.getenv("POSTGRES_DB"),
             user=os.getenv("POSTGRES_USER"),
             password=os.getenv("POSTGRES_PASSWORD"),
-            port=5432
+            port=5432,
+            host="0.0.0.0"
         )
         crsr = connection.cursor()
         

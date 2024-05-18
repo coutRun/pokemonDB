@@ -15,7 +15,7 @@ secrets:
 # The keyword 'services' to start to create services.
 services:
   client:
-    build: ./client
+    build: client
     ports:
       - 80:80
       - 5678:5678
@@ -29,6 +29,8 @@ services:
       - POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password
     depends_on:
       - database
+    links:
+      - database
 
   # The name of our service is "database"
   # but you can use the name of your choice.
@@ -36,6 +38,7 @@ services:
   database:
     # Official Postgres image from DockerHub (we use the last version)
     image: 'postgres:latest'
+    restart: always
 
     # Postgres database is running on the 5432 port by default
     # If we want to access the database from our computer (outside the container),
