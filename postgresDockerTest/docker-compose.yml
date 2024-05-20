@@ -16,6 +16,7 @@ secrets:
 services:
   client:
     build: client
+    restart: always
     ports:
       - 80:80
       - 5678:5678
@@ -23,10 +24,10 @@ services:
       - postgres_user
       - postgres_password
     environment:
-      - POSTGRES_DB=test_db
-      - DATABASE_PORT=5432
-      - POSTGRES_USER_FILE=/run/secrets/postgres_user
-      - POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password
+      POSTGRES_DB: test_db
+      DATABASE_PORT: 5432
+      POSTGRES_USER_FILE: /run/secrets/postgres_user
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
     depends_on:
       - database
     links:

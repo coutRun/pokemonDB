@@ -10,11 +10,11 @@ def connect():
     try:
         # sensitive information is stored as environment variables
         connection = psycopg2.connect(
-            database=os.getenv("POSTGRES_DB"),
+            dbname=os.getenv("POSTGRES_DB"),
             user=os.getenv("POSTGRES_USER"),
             password=os.getenv("POSTGRES_PASSWORD"),
-            port=5432,
-            host="0.0.0.0"
+            host="database",
+            port=5432
         )
         crsr = connection.cursor()
         
